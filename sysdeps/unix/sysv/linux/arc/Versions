@@ -1,0 +1,6 @@
+libc {
+  GLIBC_2.26 {
+    _flush_cache;
+    cacheflush;
+  }
+}
