@@ -9,6 +9,8 @@ Version 2.26
 
 Major new features:
 
+* Port to ARC HS cores has been contributed by Synopsys.
+
 * A per-thread cache has been added to malloc. Access to the cache requires
   no locks and therefore significantly accelerates the fast path to allocate
   and free small amounts of memory. Refilling an empty cache requires locking
