@@ -1,5 +1,104 @@
-2018-01-18  Arjun Shankar  <arjun@redhat.com>
+2017-06-28  Vineet Gupta <vgupta@synopsys.com>
+	    Cupertino Miranda <cmiranda@synopsys.com>
 
+	* NEWS: Mention new ARC port.
+	* sysdeps/arc/Implies: New file.
+	* sysdeps/arc/Makefile: New file.
+	* sysdeps/arc/Subdirs: New file.
+	* sysdeps/arc/Versions: New file.
+	* sysdeps/arc/__longjmp.S: New file.
+	* sysdeps/arc/abort-instr.h: New file.
+	* sysdeps/arc/atomic-machine.h: New file.
+	* sysdeps/arc/backtrace.c: New file.
+	* sysdeps/arc/bits/endian.h: New file.
+	* sysdeps/arc/bits/fenv.h: New file.
+	* sysdeps/arc/bits/link.h: New file.
+	* sysdeps/arc/bits/setjmp.h: New file.
+	* sysdeps/arc/bsd-_setjmp.S: New file.
+	* sysdeps/arc/bsd-setjmp.S: New file.
+	* sysdeps/arc/configure: New file.
+	* sysdeps/arc/configure.ac: New file.
+	* sysdeps/arc/crti.S: New file.
+	* sysdeps/arc/crtn.S: New file.
+	* sysdeps/arc/dl-machine.h: New file.
+	* sysdeps/arc/dl-runtime.c: New file.
+	* sysdeps/arc/dl-sysdep.h: New file.
+	* sysdeps/arc/dl-tls.h: New file.
+	* sysdeps/arc/dl-trampoline.S: New file.
+	* sysdeps/arc/gccframe.h: New file.
+	* sysdeps/arc/gmp-mparam.h: New file.
+	* sysdeps/arc/jmpbuf-offsets.h: New file.
+	* sysdeps/arc/jmpbuf-unwind.h: New file.
+	* sysdeps/arc/ldsodefs.h: New file.
+	* sysdeps/arc/libc-tls.c: New file.
+	* sysdeps/arc/libm-test-ulps: New file.
+	* sysdeps/arc/libm-test-ulps-name: New file.
+	* sysdeps/arc/machine-gmon.h: New file.
+	* sysdeps/arc/math-tests.h: New file.
+	* sysdeps/arc/math_private.h: New file.
+	* sysdeps/arc/memusage.h: New file.
+	* sysdeps/arc/nptl/Makefile: New file.
+	* sysdeps/arc/nptl/bits/pthreadtypes-arch.h: New file.
+	* sysdeps/arc/nptl/bits/semaphore.h: New file.
+	* sysdeps/arc/nptl/pthread_spin_lock.c: New file.
+	* sysdeps/arc/nptl/pthreaddef.h: New file.
+	* sysdeps/arc/nptl/tcb-offsets.sym: New file.
+	* sysdeps/arc/nptl/tls.h: New file.
+	* sysdeps/arc/preconfigure: New file.
+	* sysdeps/arc/s_fma.c: New file.
+	* sysdeps/arc/s_fmaf.c: New file.
+	* sysdeps/arc/setjmp.S: New file.
+	* sysdeps/arc/sfp-machine.h: New file.
+	* sysdeps/arc/sotruss-lib.c: New file.
+	* sysdeps/arc/stackinfo.h: New file.
+	* sysdeps/arc/start.S: New file.
+	* sysdeps/arc/sysdep.h: New file.
+	* sysdeps/arc/tls-macros.h: New file.
+	* sysdeps/arc/tst-audit.h: New file.
+	* sysdeps/unix/sysv/linux/arc/Implies: New file.
+	* sysdeps/unix/sysv/linux/arc/Makefile: New file.
+	* sysdeps/unix/sysv/linux/arc/Versions: New file.
+	* sysdeps/unix/sysv/linux/arc/arch-fork.h: New file.
+	* sysdeps/unix/sysv/linux/arc/bits/mman.h: New file.
+	* sysdeps/unix/sysv/linux/arc/bits/sigaction.h: New file.
+	* sysdeps/unix/sysv/linux/arc/c++-types.data: New file.
+	* sysdeps/unix/sysv/linux/arc/cacheflush.c: New file.
+	* sysdeps/unix/sysv/linux/arc/clone.S: New file.
+	* sysdeps/unix/sysv/linux/arc/configure: New file.
+	* sysdeps/unix/sysv/linux/arc/configure.ac: New file.
+	* sysdeps/unix/sysv/linux/arc/kernel-features.h: New file.
+	* sysdeps/unix/sysv/linux/arc/ld.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/ldconfig.h: New file.
+	* sysdeps/unix/sysv/linux/arc/libBrokenLocale.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libanl.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libc.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libcrypt.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libdl.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libm.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libnsl.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libpthread.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libresolv.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/librt.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libthread_db.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libutil.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/localplt.data: New file.
+	* sysdeps/unix/sysv/linux/arc/mmap_internal.h: New file.
+	* sysdeps/unix/sysv/linux/arc/profil-counter.h: New file.
+	* sysdeps/unix/sysv/linux/arc/pt-vfork.S: New file.
+	* sysdeps/unix/sysv/linux/arc/shlib-versions: New file.
+	* sysdeps/unix/sysv/linux/arc/sigaction.c: New file.
+	* sysdeps/unix/sysv/linux/arc/sigcontextinfo.h: New file.
+	* sysdeps/unix/sysv/linux/arc/sys/cachectl.h: New file.
+	* sysdeps/unix/sysv/linux/arc/sys/procfs.h: New file.
+	* sysdeps/unix/sysv/linux/arc/sys/ucontext.h: New file.
+	* sysdeps/unix/sysv/linux/arc/sys/user.h: New file.
+	* sysdeps/unix/sysv/linux/arc/syscall.S: New file.
+	* sysdeps/unix/sysv/linux/arc/sysdep-cancel.h: New file.
+	* sysdeps/unix/sysv/linux/arc/sysdep.c: New file.
+	* sysdeps/unix/sysv/linux/arc/sysdep.h: New file.
+	* sysdeps/unix/sysv/linux/arc/ucontext_i.sym: New file.
+
+2018-01-18  Arjun Shankar  <arjun@redhat.com>
 	[BZ #22343]
 	* malloc/malloc.c (checked_request2size): call REQUEST_OUT_OF_RANGE
 	after padding.

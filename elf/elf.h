@@ -366,6 +366,7 @@ typedef struct
 /* Old spellings/synonyms.  */
 
 #define EM_ARC_A5	EM_ARC_COMPACT
+#define EM_ARCV2	EM_ARC_COMPACT2
 
 /* If it is necessary to assign new unofficial EM_* values, please
    pick large random numbers (0x8523, 0xa7f2, etc.) to minimize the
