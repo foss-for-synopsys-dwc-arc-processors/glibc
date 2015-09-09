@@ -1,5 +1,5 @@
-/* Copyright (C) 1998-2017 Free Software Foundation, Inc.
-
+/* struct ucontext definition, ARC version.
+   Copyright (C) 2017 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
    The GNU C Library is free software; you can redistribute it and/or
@@ -16,7 +16,7 @@
    License along with the GNU C Library; if not, see
    <http://www.gnu.org/licenses/>.  */
 
-/* System V/AArch64 ABI compliant context switching support.  */
+/* System V/ARC ABI compliant context switching support.  */
 
 #ifndef _SYS_UCONTEXT_H
 #define _SYS_UCONTEXT_H	1
@@ -32,41 +32,38 @@
 # define __ctx(fld) __ ## fld
 #endif
 
-#ifdef __USE_MISC
-# include <sys/procfs.h>
-
-
-typedef elf_greg_t greg_t;
-
-/* Container for all general registers.  */
-typedef elf_gregset_t gregset_t;
-
-/* Structure to describe FPU registers.  */
-typedef elf_fpregset_t	fpregset_t;
-#endif
-
-/* Context to describe whole processor state.  This only describes
-   the core registers; coprocessor registers get saved elsewhere
-   (e.g. in uc_regspace, or somewhere unspecified on the stack
-   during non-RT signal handlers).  */
 typedef struct
   {
-    unsigned long long int __ctx(fault_address);
-    unsigned long long int __ctx(regs)[31];
-    unsigned long long int __ctx(sp);
-    unsigned long long int __ctx(pc);
-    unsigned long long int __ctx(pstate);
-    unsigned char __glibc_reserved1[4096] __attribute__ ((__aligned__ (16)));
+    unsigned long __ctx(pad);
+    struct {
+      unsigned long __ctx(bta);
+      unsigned long __ctx(lp_start), __ctx(lp_end), __ctx(lp_count);
+      unsigned long __ctx(status32), __ctx(ret), __ctx(blink);
+      unsigned long __ctx(fp), __ctx(gp);
+      unsigned long __ctx(r12), __ctx(r11), __ctx(r10), __ctx(r9), __ctx(r8);
+      unsigned long __ctx(r7), __ctx(r6), __ctx(r5), __ctx(r4), __ctx(r3);
+      unsigned long __ctx(r2), __ctx(r1), __ctx(r0);
+      unsigned long __ctx(sp);
+    } __ctx(scratch);
+    unsigned long __ctx(pad2);
+    struct {
+      unsigned long __ctx(r25), __ctx(r24), __ctx(r23), __ctx(r22), __ctx(r21);
+      unsigned long __ctx(r20), __ctx(r19), __ctx(r18), __ctx(r17), __ctx(r16);
+      unsigned long __ctx(r15), __ctx(r14), __ctx(r13);
+    } __ctx(callee);
+    unsigned long __ctx(efa);
+    unsigned long __ctx(stop_pc);
+    unsigned long __ctx(r30), __ctx(r58), __ctx(r59);
   } mcontext_t;
 
 /* Userlevel context.  */
-typedef struct ucontext
+typedef struct ucontext_t
   {
     unsigned long __ctx(uc_flags);
     struct ucontext_t *uc_link;
     stack_t uc_stack;
-    sigset_t uc_sigmask;
     mcontext_t uc_mcontext;
+    sigset_t uc_sigmask;
   } ucontext_t;
 
 #undef __ctx
