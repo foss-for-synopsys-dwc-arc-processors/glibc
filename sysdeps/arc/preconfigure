@@ -1,0 +1,6 @@
+case "$machine" in
+arc*)
+	base_machine=arc
+	machine=arc
+	;;
+esac
