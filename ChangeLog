@@ -101,6 +101,8 @@
 	* sysdeps/unix/sysv/linux/arc/shlib-versions: New file.
 	* scripts/build-many-glibcs.py: Enable building for ARC.
 	* NEW: Mention ARC port.
+	* sysdeps/unix/make-syscalls.sh: Fix comment referencing
+	syscall-template file.
 
 2019-01-31  Siddhesh Poyarekar  <siddhesh@sourceware.org>
 
