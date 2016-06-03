@@ -1,3 +1,8 @@
+2018-12-17  Vineet Gupta <vgupta@synopsys.com>
+
+	* sysdeps/unix/make-syscalls.sh: Fix comment referencing
+	syscall-template file.
+
 2018-12-17  Joseph Myers  <joseph@codesourcery.com>
 
 	* sysdeps/unix/sysv/linux/ia64/sysdep.h (ASM_CLOBBERS_6_COMMON):
