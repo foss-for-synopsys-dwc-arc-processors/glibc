@@ -34,7 +34,14 @@
    <http://www.gnu.org/licenses/>.  */
 
 
+#define __ASSEMBLY__ 1
+#include <entry.h>
+#ifndef ENTRY_POINT
+#error ENTRY_POINT needs to be defined for ARC
+#endif
+
 /* When we enter this piece of code, the program stack looks like this:
+
         argc            argument counter (integer)
         argv[0]         program name (pointer)
         argv[1...N]     program args (pointers)
@@ -45,9 +52,9 @@
 */
 	.text
 	.align 4
-	.global _start
-	.type _start,@function
-_start:
+	.global __start
+	.type __start,@function
+__start:
 	mov	fp, 0
 	ld_s	r1, [sp]	; argc
 
@@ -71,6 +78,7 @@ _start:
 
 	/* Should never get here....  */
 	flag    1
+	.size  __start,.-__start
 
 /* Define a symbol for the first piece of initialized data.  */
 	.data

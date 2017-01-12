@@ -21,6 +21,12 @@
 
 #define ELF_MACHINE_NAME "arc"
 
+#include <entry.h>
+
+#ifndef ENTRY_POINT
+#error ENTRY_POINT needs to be defined for ARC
+#endif
+
 #include <string.h>
 #include <link.h>
 #include <dl-tls.h>
@@ -149,9 +155,9 @@ elf_machine_runtime_setup (struct link_map *l, int lazy, int profile)
 
 #define RTLD_START asm ("\
 .text								\n\
-.globl _start							\n\
-.type _start, @function						\n\
-_start:								\n\
+.globl __start							\n\
+.type __start, @function					\n\
+__start:							\n\
 	; (1). bootstrap ld.so					\n\
 	bl.d    _dl_start                                       \n\
 	mov_s   r0, sp          ; pass ptr to aux vector tbl    \n\
@@ -181,7 +187,7 @@ _start:								\n\
 	add     r0, pcl, _dl_fini@pcl				\n\
 	j	[r13]						\n\
 								\n\
-	.size  _start,.-_start                                  \n\
+	.size  __start,.-__start                                \n\
 	.previous                                               \n\
 ");
 
