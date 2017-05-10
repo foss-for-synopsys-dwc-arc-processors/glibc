@@ -32,10 +32,12 @@
     .globl C_SYMBOL_NAME(name)			ASM_LINE_SEP	\
     .type C_SYMBOL_NAME(name),%function		ASM_LINE_SEP	\
   C_LABEL(name)					ASM_LINE_SEP	\
+    cfi_startproc				ASM_LINE_SEP	\
     CALL_MCOUNT
 
 #undef  END
 #define END(name)						\
+  cfi_endproc					ASM_LINE_SEP	\
   ASM_SIZE_DIRECTIVE(name)
 
 #ifdef SHARED

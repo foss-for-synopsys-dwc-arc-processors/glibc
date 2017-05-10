@@ -37,11 +37,16 @@
 	st.a	r7, [sp, -4]
 	st.a	r8, [sp, -4]
 	st.a	r9, [sp, -4]
+	cfi_adjust_cfa_offset (40)
 	push_s	blink
+	cfi_adjust_cfa_offset (4)
+	cfi_rel_offset (blink, 0)
 .endm
 
 .macro RESTORE_CALLER_SAVED_BUT_R0
 	ld.ab	blink,[sp, 4]
+	cfi_adjust_cfa_offset (-4)
+	cfi_restore (blink)
 	ld.ab	r9, [sp, 4]
 	ld.ab	r8, [sp, 4]
 	ld.ab	r7, [sp, 4]
@@ -51,6 +56,7 @@
 	pop_s   r3
 	pop_s   r2
 	pop_s   r1
+	cfi_adjust_cfa_offset (-36)
 .endm
 
 ; Upon entry, PLTn, which led us here, sets up the following regs
@@ -69,4 +75,7 @@ ENTRY(_dl_runtime_resolve)
 	RESTORE_CALLER_SAVED_BUT_R0
 	j_s.d   [r0]    ; r0 has resolved function addr
 	pop_s   r0      ; restore first arg to resolved call
+	cfi_adjust_cfa_offset (-4)
+	cfi_restore (r0)
+
 END(_dl_runtime_resolve)
