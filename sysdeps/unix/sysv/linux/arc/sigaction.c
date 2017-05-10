@@ -22,13 +22,7 @@
 #include <string.h>
 #include <sys/syscall.h>
 
-/*
- * Default sigretrun stub if user doesn't specify SA_RESTORER
- */
-static void __default_rt_sa_restorer(void)
-{
-	INTERNAL_SYSCALL_NCS(__NR_rt_sigreturn, , 0);
-}
+extern void __default_rt_sa_restorer(void);
 
 #define SA_RESTORER	0x04000000
 

@@ -103,8 +103,12 @@
 # define SYSCALL_ERROR_HANDLER					\
 .Lcall_syscall_err:				ASM_LINE_SEP	\
     st.a   blink, [sp, -4]			ASM_LINE_SEP	\
+    cfi_adjust_cfa_offset (4)			ASM_LINE_SEP	\
+    cfi_rel_offset (blink, 0)			ASM_LINE_SEP	\
     CALL_ERRNO_SETTER_C				ASM_LINE_SEP	\
     ld.ab  blink, [sp, 4]			ASM_LINE_SEP	\
+    cfi_adjust_cfa_offset (-4)			ASM_LINE_SEP	\
+    cfi_restore (blink)				ASM_LINE_SEP	\
     j      [blink]
 
 # define DO_CALL(syscall_name, args)				\
@@ -139,13 +143,14 @@ hidden_proto (__syscall_error)
 	__res = INTERNAL_SYSCALL_NCS(__NR_##name, , nr_args, args);	\
 	if (__builtin_expect (INTERNAL_SYSCALL_ERROR_P ((__res), ), 0))	\
 	{								\
-		asm volatile ("st.a blink, [sp, -4] \n\t"         	\
+		asm volatile ("st.a blink, [sp, -4] \n\t"		\
 			       CALL_ERRNO_SETTER                   	\
-			      "ld.ab blink, [sp, 4] \n\t"         	\
+			      "ld.ab blink, [sp, 4] \n\t"		\
 			      :"+r" (__res)                 		\
 			      :                                   	\
 			      :"r1","r2","r3","r4","r5","r6",		\
-			        "r7","r8","r9","r10","r11","r12");	\
+			        "r7","r8","r9","r10","r11","r12"	\
+			        );					\
 	}								\
 	__res;								\
 })
