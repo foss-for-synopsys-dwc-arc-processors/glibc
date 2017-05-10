@@ -103,8 +103,12 @@
 # define SYSCALL_ERROR_HANDLER					\
 0:						ASM_LINE_SEP	\
     st.a   blink, [sp, -4]			ASM_LINE_SEP	\
+    cfi_adjust_cfa_offset (4)			ASM_LINE_SEP	\
+    cfi_rel_offset (blink, 0)			ASM_LINE_SEP	\
     CALL_ERRNO_SETTER_C				ASM_LINE_SEP	\
     ld.ab  blink, [sp, 4]			ASM_LINE_SEP	\
+    cfi_adjust_cfa_offset (-4)			ASM_LINE_SEP	\
+    cfi_restore (blink)				ASM_LINE_SEP	\
     j      [blink]
 
 # define DO_CALL(syscall_name, args)				\
@@ -137,13 +141,13 @@ hidden_proto (__syscall_error)
 	__res = INTERNAL_SYSCALL_NCS(__NR_##name, , nr_args, args);	\
 	if (__builtin_expect (INTERNAL_SYSCALL_ERROR_P ((__res), ), 0))	\
 	{								\
-		asm volatile ("st.a blink, [sp, -4] \n\t"         	\
+		asm volatile ( \
 			       CALL_ERRNO_SETTER                   	\
-			      "ld.ab blink, [sp, 4] \n\t"         	\
 			      :"+r" (__res)                 		\
 			      :                                   	\
 			      :"r1","r2","r3","r4","r5","r6",		\
-			        "r7","r8","r9","r10","r11","r12");	\
+			        "r7","r8","r9","r10","r11","r12",	\
+			        "blink");				\
 	}								\
 	__res;								\
 })
@@ -174,7 +178,7 @@ hidden_proto (__syscall_error)
 		ARC_TRAP_INSN				\
 		: "+r" (__ret)				\
 		: "r"(_sys_num) ASM_ARGS_##nr_args	\
-		: "memory");				\
+		: "memory", "blink");				\
                                                         \
 	__ret;						\
 })
