@@ -83,10 +83,14 @@
 
 .macro PUSH reg
 	st.a \reg, [sp, -4]
+	cfi_adjust_cfa_offset (4)
+	cfi_rel_offset (\reg, 0)
 .endm
 
 .macro POP reg
 	ld.ab \reg, [sp, 4]
+	cfi_adjust_cfa_offset (-4)
+	cfi_restore (\reg)
 .endm
 
 #define DOCARGS_0	PUSH blink
