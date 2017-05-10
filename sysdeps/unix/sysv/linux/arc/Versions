@@ -9,4 +9,8 @@ libc {
     _flush_cache;
     cacheflush;
   }
+  GLIBC_PRIVATE {
+    # A copy of sigaction lives in libpthread, and needs these.
+    __default_rt_sa_restorer;
+  }
 }

@@ -1,6 +1,14 @@
 2018-12-17  Cupertino Miranda <cmiranda@synopsys.com>
 
 	* sysdeps/arc/dl-machine.h: Fix relocation.
+	* sysdeps/arc/dl-trampoline.S: Add cfi pseudo-ops.
+	* sysdeps/arc/sysdep.h: likewise.
+	* sysdeps/unix/sysv/linux/arc/sigrestorer.S: Add default sa_restorer
+	in asm.
+	* sysdeps/unix/sysv/linux/arc/sigaction.c: Delete "C" version of
+	restorer.
+	* sysdeps/unix/sysv/linux/arc/Makefile: Enable build.
+	* sysdeps/unix/sysv/linux/arc/Versions: expose default sa_restorer.
 
 2018-12-17  Vineet Gupta <vgupta@synopsys.com>
 
