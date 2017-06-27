@@ -2,6 +2,7 @@
 
 	* sysdeps/unix/make-syscalls.sh: Fix comment referencing
 	syscall-template file.
+	* stdlib/longlong.h: Fix asm constraints for ARC code.
 
 2018-12-17  Joseph Myers  <joseph@codesourcery.com>
 
