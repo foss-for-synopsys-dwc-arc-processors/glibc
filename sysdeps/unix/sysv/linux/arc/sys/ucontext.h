@@ -26,33 +26,46 @@
 #include <bits/types/sigset_t.h>
 #include <bits/types/stack_t.h>
 
+#ifdef __USE_MISC
+# define __ctx(fld) fld
+#else
+# define __ctx(fld) __ ## fld
+#endif
+
 typedef struct
   {
-    unsigned long pad;
+    unsigned long __ctx(pad);
     struct {
-      unsigned long bta, lp_start, lp_end, lp_count;
-      unsigned long status32, ret, blink, fp, gp;
-      unsigned long r12, r11, r10, r9, r8, r7, r6, r5, r4, r3, r2, r1, r0;
-      unsigned long sp;
-    } scratch;
-    unsigned long pad2;
+      unsigned long __ctx(bta);
+      unsigned long __ctx(lp_start), __ctx(lp_end), __ctx(lp_count);
+      unsigned long __ctx(status32), __ctx(ret), __ctx(blink);
+      unsigned long __ctx(fp), __ctx(gp);
+      unsigned long __ctx(r12), __ctx(r11), __ctx(r10), __ctx(r9), __ctx(r8);
+      unsigned long __ctx(r7), __ctx(r6), __ctx(r5), __ctx(r4), __ctx(r3);
+      unsigned long __ctx(r2), __ctx(r1), __ctx(r0);
+      unsigned long __ctx(sp);
+    } __ctx(scratch);
+    unsigned long __ctx(pad2);
     struct {
-      unsigned long r25, r24, r23, r22, r21, r20;
-      unsigned long r19, r18, r17, r16, r15, r14, r13;
-    } callee;
-    unsigned long efa;
-    unsigned long stop_pc;
-    unsigned long r30, r58, r59;
+      unsigned long __ctx(r25), __ctx(r24), __ctx(r23), __ctx(r22), __ctx(r21);
+      unsigned long __ctx(r20), __ctx(r19), __ctx(r18), __ctx(r17), __ctx(r16);
+      unsigned long __ctx(r15), __ctx(r14), __ctx(r13);
+    } __ctx(callee);
+    unsigned long __ctx(efa);
+    unsigned long __ctx(stop_pc);
+    unsigned long __ctx(r30), __ctx(r58), __ctx(r59);
   } mcontext_t;
 
 /* Userlevel context.  */
 typedef struct ucontext_t
   {
-    unsigned long uc_flags;
+    unsigned long __ctx(uc_flags);
     struct ucontext_t *uc_link;
     stack_t uc_stack;
     mcontext_t uc_mcontext;
     sigset_t uc_sigmask;
   } ucontext_t;
+
+#undef __ctx
 
 #endif /* sys/ucontext.h */

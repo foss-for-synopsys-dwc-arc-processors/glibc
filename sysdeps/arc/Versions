@@ -1,5 +1,5 @@
 libc {
-  GLIBC_2.26 {
+  GLIBC_2.27 {
     __adddf3; __addsf3; __divdf3; __divsf3; __eqdf2; __eqsf2; __extendsfdf2;
     __fixdfdi; __fixdfsi; __fixsfdi; __fixsfsi;
     __fixunsdfdi; __fixunsdfsi; __fixunssfdi; __fixunssfsi;

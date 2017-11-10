@@ -18,13 +18,14 @@
 
 #include <sysdep.h>
 
-#define _MCOUNT_DECL(frompc, selfpc) \
+#define _MCOUNT_DECL(frompc, selfpc)
 static void __attribute_used__ __mcount_internal (u_long frompc, u_long selfpc)
 
+/* mcount is not really supported, there are better tools now */
 #define MCOUNT						\
-  asm (".globl _mcount\n\t"				\
-       ".type _mcount,@function\n\t"			\
-       "_mcount:\n\t"					\
+  asm (".globl __mcount\n\t"				\
+       ".type __mcount,@function\n\t"			\
+       "__mcount:\n\t"					\
        "flag 1	\n\t"					\
-       ".size _mcount, . - _mcount\n\t"			\
+       ".size __mcount, . - __mcount\n\t"		\
        );
