@@ -163,6 +163,9 @@ class Context(object):
                         os_name='linux-gnu')
         self.add_config(arch='aarch64_be',
                         os_name='linux-gnu')
+        self.add_config(arch='arc',
+                        os_name='linux-gnu',
+                        gcc_cfg=['--disable-multilib', '--with-cpu=archs'])
         self.add_config(arch='alpha',
                         os_name='linux-gnu')
         self.add_config(arch='arm',
@@ -757,13 +760,13 @@ class Context(object):
                 git_branch = 'binutils-%s-branch' % version.translate(trans)
             return self.git_checkout(component, git_url, git_branch, update)
         elif component == 'gcc':
+            git_url = 'git://gcc.gnu.org/git/gcc.git'
             if version == 'mainline':
-                branch = 'trunk'
+                branch = 'master'
             else:
                 trans = str.maketrans({'.': '_'})
-                branch = 'branches/gcc-%s-branch' % version.translate(trans)
-            svn_url = 'svn://gcc.gnu.org/svn/gcc/%s' % branch
-            return self.gcc_checkout(svn_url, update)
+                branch = 'gcc-%s-branch' % version.translate(trans)
+            return self.git_checkout(component, git_url, branch, update)
         elif component == 'glibc':
             git_url = 'git://sourceware.org/git/glibc.git'
             if version == 'mainline':
@@ -1192,6 +1195,7 @@ class Config(object):
     def install_linux_headers(self, cmdlist):
         """Install Linux kernel headers."""
         arch_map = {'aarch64': 'arm64',
+                    'arc': 'arc',
                     'alpha': 'alpha',
                     'arm': 'arm',
                     'hppa': 'parisc',
@@ -1542,11 +1546,11 @@ def get_parser():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('-j', dest='parallelism',
                         help='Run this number of jobs in parallel',
-                        type=int, default=os.cpu_count())
+                        type=int, default=1)
     parser.add_argument('--keep', dest='keep',
                         help='Whether to keep all build directories, '
                         'none or only those from failed builds',
-                        default='none', choices=('none', 'all', 'failed'))
+                        default='all', choices=('none', 'all', 'failed'))
     parser.add_argument('--replace-sources', action='store_true',
                         help='Remove and replace source directories '
                         'with the wrong version of a component')
