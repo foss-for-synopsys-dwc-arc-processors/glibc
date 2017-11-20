@@ -10,7 +10,7 @@
 #define PROCNUM 1
 #define PROCQUIT 2
 
-static int exitcode;
+static int exitcode = 1;
 
 struct rpc_arg
 {
@@ -63,6 +63,7 @@ thread_wrapper (void *arg)
 int
 main (void)
 {
+#if 0
   pthread_t tid;
   pid_t pid;
   int err;
@@ -104,6 +105,6 @@ main (void)
   err = pthread_join (tid, 0);
   if (err)
     fprintf (stderr, "pthread_join: %s\n", strerror (err));
-
+#endif
   return exitcode;
 }
