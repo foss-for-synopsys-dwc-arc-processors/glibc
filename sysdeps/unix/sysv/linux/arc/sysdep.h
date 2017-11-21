@@ -119,6 +119,8 @@
 
 #else  /* !__ASSEMBLER__ */
 
+# define SINGLE_THREAD_BY_GLOBAL		1
+
 /* In order to get __set_errno() definition in INLINE_SYSCALL.  */
 #include <errno.h>
 
