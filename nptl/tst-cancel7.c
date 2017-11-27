@@ -32,7 +32,6 @@ const char *command;
 const char *pidfile;
 char pidfilename[] = "/tmp/tst-cancel7-XXXXXX";
 
-#if 0
 static void *
 tf (void *arg)
 {
@@ -72,12 +71,11 @@ sl (void)
   sigsuspend (&ss);
   exit (0);
 }
-#endif
+
 
 static void
 do_prepare (int argc, char *argv[])
 {
-#if 0
   if (command == NULL)
     command = argv[0];
 
@@ -93,14 +91,12 @@ do_prepare (int argc, char *argv[])
 
   write (fd, " ", 1);
   close (fd);
-#endif
 }
 
 
 static int
 do_test (void)
 {
-#if 0
   pthread_t th;
   if (pthread_create (&th, NULL, tf, NULL) != 0)
     {
@@ -161,15 +157,11 @@ do_test (void)
   unlink (pidfilename);
 
   return r != PTHREAD_CANCELED;
-#else
-  return 1;
-#endif
 }
 
 static void
 do_cleanup (void)
 {
-#if 0
   FILE *f = fopen (pidfilename, "r+");
   long long ll;
 
@@ -190,7 +182,6 @@ do_cleanup (void)
     }
 
   unlink (pidfilename);
-#endif
 }
 
 #define OPT_COMMAND	10000
