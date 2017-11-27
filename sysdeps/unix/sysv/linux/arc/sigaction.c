@@ -29,10 +29,11 @@ static void __default_rt_sa_restorer(void)
 {
 	/* Don't use INTERNAL_SYSCALL_NCS as it causes blink to be spilled on stack */
 	asm volatile(
+		"nop		\n\t"	\
 		"mov r8, %0	\n\t"	\
 		ARC_TRAP_INSN		\
 	:
-	: "r"(__NR_rt_sigreturn));
+	: "i"(__NR_rt_sigreturn));
 }
 
 #define SA_RESTORER	0x04000000
