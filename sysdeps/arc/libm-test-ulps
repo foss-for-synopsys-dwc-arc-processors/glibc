@@ -46,15 +46,15 @@ idouble: 1
 ifloat: 2
 
 Function: Imaginary part of "cacos":
-double: 1
+double: 2
 float: 2
-idouble: 1
+idouble: 2
 ifloat: 2
 
 Function: Real part of "cacosh":
-double: 1
+double: 2
 float: 2
-idouble: 1
+idouble: 2
 ifloat: 2
 
 Function: Imaginary part of "cacosh":
@@ -74,15 +74,15 @@ idouble: 1
 ifloat: 1
 
 Function: Imaginary part of "casin":
-double: 1
+double: 2
 float: 2
-idouble: 1
+idouble: 2
 ifloat: 2
 
 Function: Real part of "casinh":
-double: 1
+double: 2
 float: 2
-idouble: 1
+idouble: 2
 ifloat: 2
 
 Function: Imaginary part of "casinh":
@@ -92,7 +92,9 @@ idouble: 1
 ifloat: 1
 
 Function: Real part of "catan":
+double: 1
 float: 1
+idouble: 1
 ifloat: 1
 
 Function: Imaginary part of "catan":
@@ -108,7 +110,9 @@ idouble: 1
 ifloat: 1
 
 Function: Imaginary part of "catanh":
+double: 1
 float: 1
+idouble: 1
 ifloat: 1
 
 Function: "cbrt":
@@ -259,19 +263,13 @@ float: 2
 idouble: 3
 ifloat: 2
 
-Function: "exp":
-float: 1
-ifloat: 1
-
 Function: "exp10":
 double: 2
 idouble: 2
 
 Function: "exp2":
 double: 1
-float: 1
 idouble: 1
-ifloat: 1
 
 Function: "expm1":
 double: 1
@@ -281,9 +279,9 @@ ifloat: 1
 
 Function: "gamma":
 double: 4
-float: 4
+float: 3
 idouble: 4
-ifloat: 4
+ifloat: 3
 
 Function: "hypot":
 double: 1
@@ -309,13 +307,9 @@ ifloat: 4
 
 Function: "lgamma":
 double: 4
-float: 4
+float: 3
 idouble: 4
-ifloat: 4
-
-Function: "log":
-float: 1
-ifloat: 1
+ifloat: 3
 
 Function: "log10":
 double: 2
@@ -334,14 +328,6 @@ double: 2
 float: 1
 idouble: 2
 ifloat: 1
-
-Function: "pow":
-float: 3
-ifloat: 3
-
-Function: "pow10":
-double: 2
-idouble: 2
 
 Function: "sin":
 float: 1
@@ -369,9 +355,9 @@ ifloat: 2
 
 Function: "tgamma":
 double: 5
-float: 5
+float: 4
 idouble: 5
-ifloat: 5
+ifloat: 4
 
 Function: "y0":
 double: 2
