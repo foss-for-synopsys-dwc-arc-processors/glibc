@@ -9,5 +9,6 @@ libc {
     __muldf3; __mulsf3; __nedf2; __nesf2; __negdf2; __negsf2;
     __subdf3; __subsf3; __truncdfsf2; __unorddf2; __unordsf2;
     __syscall_error;
+    __mcount;
   }
 }

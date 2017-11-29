@@ -296,6 +296,7 @@ GLIBC_2.27 __mbrtowc F
 GLIBC_2.27 __mbsnrtowcs_chk F
 GLIBC_2.27 __mbsrtowcs_chk F
 GLIBC_2.27 __mbstowcs_chk F
+GLIBC_2.27 __mcount F
 GLIBC_2.27 __memalign_hook D 0x4
 GLIBC_2.27 __memcpy_chk F
 GLIBC_2.27 __memmove_chk F
