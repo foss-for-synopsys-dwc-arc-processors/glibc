@@ -78,8 +78,11 @@ ENTRY(__clone)
 	jl.d	[r10]
 	mov	r0, r11
 
-	; falls thru to _exit() with result from @fn (already in r0)
-	b	HIDDEN_JUMPTARGET(_exit)
+	; exit() with result from @fn (already in r0)
+	mov	r8, __NR_exit
+	ARC_TRAP_INSN
+	; In case it ever came back
+	flag	1
 
 .L__sys_err:
 	mov	r0, -EINVAL
