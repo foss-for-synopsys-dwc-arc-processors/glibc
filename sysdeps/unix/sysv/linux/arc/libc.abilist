@@ -645,6 +645,7 @@ GLIBC_2.27 closedir F
 GLIBC_2.27 closelog F
 GLIBC_2.27 confstr F
 GLIBC_2.27 connect F
+GLIBC_2.27 copy_file_range F
 GLIBC_2.27 copysign F
 GLIBC_2.27 copysignf F
 GLIBC_2.27 copysignl F
@@ -1247,6 +1248,7 @@ GLIBC_2.27 memccpy F
 GLIBC_2.27 memchr F
 GLIBC_2.27 memcmp F
 GLIBC_2.27 memcpy F
+GLIBC_2.27 memfd_create F
 GLIBC_2.27 memfrob F
 GLIBC_2.27 memmem F
 GLIBC_2.27 memmove F
@@ -1270,6 +1272,7 @@ GLIBC_2.27 mkstemps64 F
 GLIBC_2.27 mktemp F
 GLIBC_2.27 mktime F
 GLIBC_2.27 mlock F
+GLIBC_2.27 mlock2 F
 GLIBC_2.27 mlockall F
 GLIBC_2.27 mmap F
 GLIBC_2.27 mmap64 F
@@ -1342,6 +1345,11 @@ GLIBC_2.27 personality F
 GLIBC_2.27 pipe F
 GLIBC_2.27 pipe2 F
 GLIBC_2.27 pivot_root F
+GLIBC_2.27 pkey_alloc F
+GLIBC_2.27 pkey_free F
+GLIBC_2.27 pkey_get F
+GLIBC_2.27 pkey_mprotect F
+GLIBC_2.27 pkey_set F
 GLIBC_2.27 pmap_getmaps F
 GLIBC_2.27 pmap_getport F
 GLIBC_2.27 pmap_rmtcall F
@@ -1710,6 +1718,9 @@ GLIBC_2.27 strfmon F
 GLIBC_2.27 strfmon_l F
 GLIBC_2.27 strfromd F
 GLIBC_2.27 strfromf F
+GLIBC_2.27 strfromf32 F
+GLIBC_2.27 strfromf32x F
+GLIBC_2.27 strfromf64 F
 GLIBC_2.27 strfroml F
 GLIBC_2.27 strfry F
 GLIBC_2.27 strftime F
@@ -1733,6 +1744,12 @@ GLIBC_2.27 strstr F
 GLIBC_2.27 strtod F
 GLIBC_2.27 strtod_l F
 GLIBC_2.27 strtof F
+GLIBC_2.27 strtof32 F
+GLIBC_2.27 strtof32_l F
+GLIBC_2.27 strtof32x F
+GLIBC_2.27 strtof32x_l F
+GLIBC_2.27 strtof64 F
+GLIBC_2.27 strtof64_l F
 GLIBC_2.27 strtof_l F
 GLIBC_2.27 strtoimax F
 GLIBC_2.27 strtok F
@@ -1946,6 +1963,12 @@ GLIBC_2.27 wcsstr F
 GLIBC_2.27 wcstod F
 GLIBC_2.27 wcstod_l F
 GLIBC_2.27 wcstof F
+GLIBC_2.27 wcstof32 F
+GLIBC_2.27 wcstof32_l F
+GLIBC_2.27 wcstof32x F
+GLIBC_2.27 wcstof32x_l F
+GLIBC_2.27 wcstof64 F
+GLIBC_2.27 wcstof64_l F
 GLIBC_2.27 wcstof_l F
 GLIBC_2.27 wcstoimax F
 GLIBC_2.27 wcstok F
