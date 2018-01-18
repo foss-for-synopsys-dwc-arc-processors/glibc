@@ -3,7 +3,6 @@ libc.so: malloc
 libc.so: memalign
 libc.so: calloc
 libc.so: free
-libc.so: memcpy
 # abort is needed as gcc ATM gcc lacks __builtin_trap()
 libc.so: abort
 ld.so: malloc
