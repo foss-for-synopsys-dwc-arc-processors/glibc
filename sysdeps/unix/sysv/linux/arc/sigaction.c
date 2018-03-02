@@ -22,6 +22,8 @@
 #include <string.h>
 #include <sys/syscall.h>
 
+extern void __default_rt_sa_restorer(void);
+
 #define SA_RESTORER	0x04000000
 
 /* If @act is not NULL, change the action for @sig to @act.
