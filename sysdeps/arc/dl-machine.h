@@ -91,7 +91,8 @@
 static inline int
 elf_machine_matches_host (const Elf32_Ehdr *ehdr)
 {
-  return ehdr->e_machine == EM_ARCV2;
+  return (ehdr->e_machine == EM_ARCV2  /* ARC HS */
+	  || ehdr->e_machine == EM_ARC_COMPACT); /* ARC 700 */
 }
 
 /*

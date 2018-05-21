@@ -80,6 +80,10 @@ typedef uintmax_t uatomic_max_t;
 	__val;								\
   })
 
+#ifdef __ARC700__
+#define atomic_full_barrier()  ({ asm volatile ("sync":::"memory"); })
+#else
 #define atomic_full_barrier()  ({ asm volatile ("dmb 3":::"memory"); })
+#endif
 
 #endif /* _ARC_BITS_ATOMIC_H */
