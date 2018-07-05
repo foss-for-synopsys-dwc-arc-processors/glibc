@@ -36,7 +36,7 @@ typedef int_fast64_t	zic_t;
 #include <sys/stat.h>
 #endif
 #ifdef S_IRUSR
-#define MKDIR_UMASK (S_IRUSR|S_IWUSR|S_IXUSR|S_IRGRP|S_IXGRP|S_IROTH|S_IXOTH)
+#define MKDIR_UMASK (S_IRUSR|S_IWUSR|S_IXUSR|S_IRGRP|S_IWGRP|S_IXGRP|S_IROTH|S_IWOTH|S_IXOTH)
 #else
 #define MKDIR_UMASK 0755
 #endif
