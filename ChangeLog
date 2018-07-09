@@ -108,6 +108,7 @@
 	* sysdeps/arc/dl-machine.h: replace _start with __start.
 	* sysdeps/arc/start.S: likewise.
 	* sysdeps/arc/entry.h: Add ENTRY_POINT define check.
+	* sysdeps/arc/crti.S: add .hidden annotations.
 
 2018-12-17  Joseph Myers  <joseph@codesourcery.com>
 

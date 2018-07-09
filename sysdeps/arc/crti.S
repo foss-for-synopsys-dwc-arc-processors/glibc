@@ -53,6 +53,7 @@
 	.section .init
 	.align 4
 	.global	_init
+	.hidden	_init
 	.type	 _init,@function
 _init:
 	st.a	blink, [sp,-4]
@@ -69,6 +70,7 @@ _init:
 	.section .fini
 	.align 4
 	.global	_fini
+	.hidden	_fini
 	.type	 _fini,@function
 _fini:
 	st.a blink,[sp,-4]
