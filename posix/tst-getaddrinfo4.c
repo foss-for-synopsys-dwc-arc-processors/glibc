@@ -39,6 +39,7 @@ try (const char *service, int family, int flags)
     case 0:
     case EAI_AGAIN:
     case EAI_NONAME:
+    case EAI_NODATA:
       printf ("SUCCESS getaddrinfo(service=%s, family=%d, flags=%d): %s: %m\n",
               service ?: "NULL", family, flags, gai_strerror (res));
       return 0;
