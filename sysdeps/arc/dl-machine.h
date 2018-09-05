@@ -290,7 +290,7 @@ elf_machine_rela (struct link_map *map, const ElfW(Rela) *reloc,
         case R_ARC_TLS_DTPOFF:
           if (sym != NULL)
             {
-              *reloc_addr = sym->st_value;
+              *reloc_addr += sym->st_value;
             }
           break;
 
