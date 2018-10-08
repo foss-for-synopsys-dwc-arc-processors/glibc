@@ -33,6 +33,6 @@ ENTRY (syscall)
 #endif
 
 	ARC_TRAP_INSN
-        brhi    r0, -1024, 0f
+	brhi	r0, -1024, .Lcall_syscall_err
 	j	[blink]
 PSEUDO_END (syscall)

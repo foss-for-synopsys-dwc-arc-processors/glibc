@@ -50,8 +50,12 @@ __libc_sigaction (int sig, const struct sigaction *act, struct sigaction *oact)
 		arg = act;
 	}
 
-	return INLINE_SYSCALL(rt_sigaction, 4,
-			sig, arg, oact, _NSIG / 8);
+	/*
+	 * syscall also expects sizeof(sa_mask) and asm-generic kernel syscall
+	 * ABI mandates it be 2 words (8 bytes below) although glibc defines
+	 * sigset_to be much larger (1024 / 32 == 64 bytes)
+	 */
+	return INLINE_SYSCALL(rt_sigaction, 4, sig, arg, oact, _NSIG / 8);
 }
 
 libc_hidden_def (__libc_sigaction)

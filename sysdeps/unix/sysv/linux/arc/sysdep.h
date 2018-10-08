@@ -39,7 +39,7 @@
 # undef PSEUDO
 # define PSEUDO(name, syscall_name, args)			\
   PSEUDO_NOERRNO(name, syscall_name, args)	ASM_LINE_SEP	\
-    brhi   r0, -1024, 0f			ASM_LINE_SEP
+    brhi   r0, -1024, .Lcall_syscall_err	ASM_LINE_SEP
 
 #define ret	j  [blink]
 
@@ -101,7 +101,7 @@
 #endif
 
 # define SYSCALL_ERROR_HANDLER					\
-0:						ASM_LINE_SEP	\
+.Lcall_syscall_err:				ASM_LINE_SEP	\
     st.a   blink, [sp, -4]			ASM_LINE_SEP	\
     cfi_adjust_cfa_offset (4)			ASM_LINE_SEP	\
     cfi_rel_offset (blink, 0)			ASM_LINE_SEP	\

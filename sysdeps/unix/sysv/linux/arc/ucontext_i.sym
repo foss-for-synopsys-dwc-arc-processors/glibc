@@ -6,6 +6,9 @@
 SIG_BLOCK
 SIG_SETMASK
 
+-- sizeof(sigset_t) expected by kernel: see comment in ARC sigaction.c for details
+_NSIG8				(_NSIG / 8)
+
 -- Offsets of the fields in the ucontext_t structure.
 #define ucontext(member)	offsetof (ucontext_t, member)
 

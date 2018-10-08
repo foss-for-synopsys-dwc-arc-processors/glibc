@@ -24,21 +24,21 @@
 
 ENTRY(__longjmp)
 
-	ld_s r13, [r0]
-	ld_s r14, [r0,4]
-	ld   r15, [r0,8]
-	ld   r16, [r0,12]
-	ld   r17, [r0,16]
-	ld   r18, [r0,20]
-	ld   r19, [r0,24]
-	ld   r20, [r0,28]
-	ld   r21, [r0,32]
-	ld   r22, [r0,36]
-	ld   r23, [r0,40]
-	ld   r24, [r0,44]
-	ld   r25, [r0,48]
+	ld_s r13,   [r0]
+	ld_s r14,   [r0,4]
+	ld   r15,   [r0,8]
+	ld   r16,   [r0,12]
+	ld   r17,   [r0,16]
+	ld   r18,   [r0,20]
+	ld   r19,   [r0,24]
+	ld   r20,   [r0,28]
+	ld   r21,   [r0,32]
+	ld   r22,   [r0,36]
+	ld   r23,   [r0,40]
+	ld   r24,   [r0,44]
+	ld   r25,   [r0,48]
 
-	ld   blink, [r0,60]	; load it early enough to not stall the pipeline
+	ld   blink, [r0,60]
 	ld   fp,    [r0,52]
 	ld   sp,    [r0,56]
 
