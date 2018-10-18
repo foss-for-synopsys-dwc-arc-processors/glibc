@@ -79,6 +79,8 @@ weak_alias(__setcontext, setcontext)
 
 ENTRY(__startcontext)
 
+	cfi_register (blink, r15)
+
         /* call user @func, loaded in r13 by setcontext() */
         jl   [r13]
 

@@ -45,6 +45,7 @@ __makecontext (ucontext_t *ucp, void (*func) (void), int argc, ...)
    */
   ucp->uc_mcontext.callee.r13 = (unsigned long) func;
   ucp->uc_mcontext.callee.r14 = (unsigned long) ucp->uc_link;
+  ucp->uc_mcontext.callee.r15 = 0;
 
   r = &ucp->uc_mcontext.scratch.r0;
 
