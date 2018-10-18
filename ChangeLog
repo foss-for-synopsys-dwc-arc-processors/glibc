@@ -110,6 +110,8 @@
 	* sysdeps/arc/entry.h: Add ENTRY_POINT define check.
 	* sysdeps/arc/crti.S: add .hidden annotations.
 	* sysdeps/unix/sysv/linux/arc/ipc_priv.h: New file.
+	* sysdeps/unix/sysv/linux/arc/makecontext.c: clear r15.
+	* sysdeps/unix/sysv/linux/arc/setcontext.S: set blink from r15.
 
 2018-12-17  Joseph Myers  <joseph@codesourcery.com>
 
