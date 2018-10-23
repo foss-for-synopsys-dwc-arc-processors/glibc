@@ -1,0 +1,6 @@
+#define JMP_BUF_SIZE		(32 + 1 + 1024/32) * 4
+#define SIGJMP_BUF_SIZE		(32 + 1 + 1024/32) * 4
+#define JMP_BUF_ALIGN		4
+#define SIGJMP_BUF_ALIGN	4
+#define MASK_WAS_SAVED_OFFSET	32 * 4
+#define SAVED_MASK_OFFSET	33 * 4
