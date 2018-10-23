@@ -35,6 +35,9 @@
 	* sysdeps/arc/nptl/tcb-offsets.sym: New file.
 	* sysdeps/arc/nptl/tls.h: New file.
 	* sysdeps/arc/stackinfo.h: New file.
+	* sysdeps/arc/atomic-machine.h: New file.
+	* sysdeps/arc/nptl/bits/pthreadtypes-arch.h: New file.
+	* sysdeps/arc/nptl/bits/semaphore.h: New file.
 
 2018-12-17  Joseph Myers  <joseph@codesourcery.com>
 
