@@ -74,6 +74,23 @@
 	* sysdeps/unix/sysv/linux/arc/dl-static.c: New file.
 	* sysdeps/unix/sysv/linux/arc/ldconfig.h: New file.
 	* sysdeps/unix/sysv/linux/arc/ldsodefs.h: New file.
+	* sysdeps/arc/nofpu/libm-test-ulps: New file.
+	* sysdeps/arc/nofpu/libm-test-ulps-name: New file.
+	* sysdeps/unix/sysv/linux/arc/c++-types.data: New file.
+	* sysdeps/unix/sysv/linux/arc/ld.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libBrokenLocale.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libanl.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libc.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libcrypt.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libdl.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libm.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libnsl.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libpthread.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libresolv.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/librt.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libthread_db.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/libutil.abilist: New file.
+	* sysdeps/unix/sysv/linux/arc/localplt.data: New file.
 
 2018-12-17  Joseph Myers  <joseph@codesourcery.com>
 
