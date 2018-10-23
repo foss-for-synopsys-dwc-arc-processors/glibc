@@ -67,6 +67,8 @@
 	* sysdeps/unix/sysv/linux/arc/sys/user.h: New file.
 	* sysdeps/unix/sysv/linux/arc/ucontext-macros.h: New file.
 	* sysdeps/unix/sysv/linux/arc/ucontext_i.sym: New file.
+	* sysdeps/unix/sysv/linux/arc/dl-static.c: New file.
+	* sysdeps/unix/sysv/linux/arc/ldsodefs.h: New file.
 
 2019-01-31  Siddhesh Poyarekar  <siddhesh@sourceware.org>
 
