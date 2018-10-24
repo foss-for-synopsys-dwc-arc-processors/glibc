@@ -1,6 +1,7 @@
 2018-12-17  Vineet Gupta <vgupta@synopsys.com>
 
 	* scripts/build-many-glibcs.py: Enable building for ARC.
+	* NEW: Mention ARC port.
 
 2018-12-17  Cupertino Miranda <cmiranda@synopsys.com>
 
