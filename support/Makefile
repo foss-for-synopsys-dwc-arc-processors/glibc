@@ -169,12 +169,7 @@ CFLAGS-support_paths.c = \
 		-DINSTDIR_PATH=\"$(prefix)\" \
 		-DLIBDIR_PATH=\"$(libdir)\"
 
-ifeq (,$(CXX))
 LINKS_DSO_PROGRAM = links-dso-program-c
-else
-LINKS_DSO_PROGRAM = links-dso-program
-LDLIBS-links-dso-program = -lstdc++ -lgcc -lgcc_s $(libunwind)
-endif
 
 LDLIBS-test-container = $(libsupport)
 
