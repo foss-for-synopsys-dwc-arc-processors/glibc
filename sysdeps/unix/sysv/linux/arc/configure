@@ -1,4 +1,22 @@
-# This file is generated from configure.in by Autoconf.  DO NOT EDIT!
+# This file is generated from configure.ac by Autoconf.  DO NOT EDIT!
  # Local configure fragment for sysdeps/unix/sysv/linux/arc.
 
 arch_minimum_kernel=3.9.0
+
+# Extract "-mcpu=xxx" value from CC to install libs in a separate folder
+arc_mcpu=`echo $CC | grep -Po '\-mcpu=\K[^ ]+'`
+
+if test "$arc_mcpu" != "" ; then
+	test -n "$libc_cv_slibdir" ||
+case "$prefix" in
+/usr | /usr/)
+  libc_cv_slibdir="/lib/${arc_mcpu}"
+  libc_cv_rtlddir="/lib/${arc_mcpu}"
+  if test "$libdir" = '${exec_prefix}/lib'; then
+    libdir='${exec_prefix}'"/lib/${arc_mcpu}";
+    # Locale data can be shared between 32-bit and 64-bit libraries.
+    libc_cv_complocaledir='${exec_prefix}/lib/locale'
+  fi
+  ;;
+esac
+fi
