@@ -311,6 +311,7 @@ tests = tst-attr2 tst-attr3 tst-default-attr \
 	tst-pthread-gdb-attach tst-pthread-gdb-attach-static \
 	tst-pthread_exit-nothreads \
 	tst-pthread_exit-nothreads-static \
+	tst-eintr1 \
 	tst-thread-setspecific
 
 tests-nolibpthread = \
@@ -332,10 +333,6 @@ xtests = tst-setuid1 tst-setuid1-static tst-setuid2 \
 
 tests-time64 := \
   tst-cancel4_2-time64
-
-# This test can run into task limits because of a linux kernel bug
-# and then cause the make process to fail too, see bug 24537.
-xtests += tst-eintr1
 
 test-srcs = tst-oddstacklimit
 
