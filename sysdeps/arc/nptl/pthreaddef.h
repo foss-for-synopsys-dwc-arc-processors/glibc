@@ -23,13 +23,13 @@
 #define ARCH_MIN_GUARD_SIZE 0
 
 /* Required stack pointer alignment at beginning.  */
-#define STACK_ALIGN		4
+#define STACK_ALIGN		8
 
 /* Minimal stack size after allocating thread descriptor and guard size.  */
 #define MINIMAL_REST_STACK	2048
 
 /* Alignment requirement for TCB.  */
-#define TCB_ALIGNMENT		4
+#define TCB_ALIGNMENT		8
 
 /* Location of current stack frame.  */
 #define CURRENT_STACK_FRAME	__builtin_frame_address (0)
