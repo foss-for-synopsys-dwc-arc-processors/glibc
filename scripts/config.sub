@@ -1145,6 +1145,10 @@ case $cpu-$vendor in
 		cpu=s390x
 		vendor=ibm
 		;;
+	arc64*-*)
+		cpu=arc64
+		vendor=linux
+		;;
 	tile*-*)
 		os=${os:-linux-gnu}
 		;;
