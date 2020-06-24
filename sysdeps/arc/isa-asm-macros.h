@@ -1,4 +1,4 @@
-/* Assembler macros for ARC.
+/* ISA Specific Assembler macros for ARC.
    Copyright (C) 2020 Free Software Foundation, Inc.
    This file is part of the GNU C Library.
 
@@ -16,37 +16,20 @@
    License along with the GNU C Library; if not, see
    <https://www.gnu.org/licenses/>.  */
 
-#include <sysdeps/generic/sysdep.h>
-
 #ifdef	__ASSEMBLER__
 
-/* Syntactic details of assembler.
-   ; is not newline but comment, # is also for comment.  */
-# define ASM_SIZE_DIRECTIVE(name) .size name,.-name
-
-# define ENTRY(name)						\
-	.align 4				ASM_LINE_SEP	\
-	.globl C_SYMBOL_NAME(name)		ASM_LINE_SEP	\
-	.type C_SYMBOL_NAME(name),%function	ASM_LINE_SEP	\
-	C_LABEL(name)				ASM_LINE_SEP	\
-	cfi_startproc				ASM_LINE_SEP	\
-	CALL_MCOUNT
-
-# undef  END
-# define END(name)						\
-	cfi_endproc				ASM_LINE_SEP	\
-	ASM_SIZE_DIRECTIVE(name)
-
-# ifdef SHARED
-#  define PLTJMP(_x)	_x##@plt
+# ifdef __ARC64__
+# include <sysdeps/arc/isa-asm-macro-64.h>
 # else
-#  define PLTJMP(_x)	_x
+# include <sysdeps/arc/isa-asm-macro-32.h>
 # endif
 
-# define L(label) .L##label
+#else
 
-# define CALL_MCOUNT		/* Do nothing for now.  */
+# ifdef __ARC64__
+asm(".include \"sysdeps/arc/isa-asm-macro-64.h\"\n");
+# else
+asm(".include \"sysdeps/arc/isa-asm-macro-32.h\"\n");
+# endif
 
-#endif	/* __ASSEMBLER__ */
-
-#include <sysdeps/arc/isa-asm-macros.h>
+#endif

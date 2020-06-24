@@ -30,6 +30,7 @@
 #include <string.h>
 #include <link.h>
 #include <dl-tls.h>
+#include <sysdep.h>
 
 /* Dynamic Linking ABI for ARCv2 ISA.
 
@@ -112,7 +113,7 @@ elf_machine_load_address (void)
   /* For build address, below generates
      ld  r0, [pcl, _GLOBAL_OFFSET_TABLE_@pcl].  */
   build_addr = elf_machine_dynamic ();
-  __asm__ ("add %0, pcl, _DYNAMIC@pcl	\n" : "=r" (run_addr));
+  __asm__ ("ADDR %0, pcl, _DYNAMIC@pcl	\n" : "=r" (run_addr));
 
   return run_addr - build_addr;
 }
@@ -156,32 +157,32 @@ elf_machine_runtime_setup (struct link_map *l, int lazy, int profile)
 __start:								\n\
 	/* (1). bootstrap ld.so.  */					\n\
 	bl.d    _dl_start                                       	\n\
-	mov_s   r0, sp  /* pass ptr to aux vector tbl.    */    	\n\
-	mov r13, r0	/* safekeep app elf entry point.  */		\n\
+	MOVR    r0, sp  /* pass ptr to aux vector tbl.    */    	\n\
+	MOVR    r13, r0	/* safekeep app elf entry point.  */		\n\
 									\n\
 	/* (2). If ldso ran with executable as arg.       */		\n\
 	/*      skip the extra args calc by dl_start.     */		\n\
-	ld_s    r1, [sp]       /* orig argc.  */			\n\
-	ld      r12, [pcl, _dl_skip_args@pcl]                   	\n\
-	breq	r12, 0, 1f						\n\
+	LDR     r1,  sp       	/* orig argc.  */			\n\
+	LDR     r12, pcl, _dl_skip_args@pcl                   		\n\
+	BRReq	r12, 0, 1f						\n\
 									\n\
-	add2    sp, sp, r12 /* discard argv entries from stack.  */	\n\
-	sub_s   r1, r1, r12 /* adjusted argc on stack.  */      	\n\
-	st_s    r1, [sp]                                        	\n\
-	add	r2, sp, 4						\n\
-	/* intermediate LD for ST emcoding limitations.  */		\n\
-	ld	r3, [pcl, _dl_argv@gotpc]    				\n\
-	st	r2, [r3]						\n\
+	ADD2R   sp, sp, r12 /* discard argv entries from stack.  */	\n\
+	SUBR    r1, r1, r12 /* adjusted argc on stack.  */      	\n\
+	STR     r1, sp                                        	\n\
+	ADDR	r2, sp, 4						\n\
+	/* intermediate LD for ST encoding limitations.  */		\n\
+	LDR	r3, pcl, _dl_argv@gotpc    				\n\
+	STR	r2, r3						\n\
 1:									\n\
 	/* (3). call preinit stuff.  */					\n\
-	ld	r0, [pcl, _rtld_local@pcl]				\n\
-	add	r2, sp, 4	; argv					\n\
-	add2	r3, r2, r1						\n\
-	add	r3, r3, 4	; env					\n\
+	LDR	r0, pcl, _rtld_local@pcl				\n\
+	ADDR	r2, sp, 4	; argv					\n\
+	ADD2R	r3, r2, r1						\n\
+	ADDR	r3, r3, 4	; env					\n\
 	bl	_dl_init@plt						\n\
 									\n\
 	/* (4) call app elf entry point.  */				\n\
-	add     r0, pcl, _dl_fini@pcl					\n\
+	ADDR    r0, pcl, _dl_fini@pcl					\n\
 	j	[r13]							\n\
 									\n\
 	.size  __start,.-__start                               		\n\

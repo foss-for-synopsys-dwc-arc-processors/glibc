@@ -40,24 +40,24 @@ ENTRY (ENTRY_POINT)
 	cfi_undefined (blink)
 
 	mov	fp, 0
-	ld_s	r1, [sp]	/* argc.  */
+	LDR	r1, sp		/* argc.  */
 
-	mov_s	r5, r0		/* rltd_fini.  */
-	add_s	r2, sp, 4	/* argv.  */
-	and	sp, sp, -8
-	mov	r6, sp
+	MOVR	r5, r0		/* rltd_fini.  */
+	ADDR	r2, sp, REGSZ	/* argv.  */
+	ANDR	sp, sp, -2*REGSZ
+	MOVR	r6, sp
 
 	/* __libc_start_main (main, argc, argv, init, fini, rtld_fini, stack_end).  */
 
 #ifdef SHARED
-	ld	r0, [pcl, @main@gotpc]
-	ld	r3, [pcl, @__libc_csu_init@gotpc]
-	ld	r4, [pcl, @__libc_csu_fini@gotpc]
+	LDR	r0, pcl, @main@gotpc
+	LDR	r3, pcl, @__libc_csu_init@gotpc
+	LDR	r4, pcl, @__libc_csu_fini@gotpc
 	bl	__libc_start_main@plt
 #else
-	mov_s	r0, main
-	mov_s	r3, __libc_csu_init
-	mov	r4, __libc_csu_fini
+	MOVR	r0, main
+	MOVR	r3, __libc_csu_init
+	MOVR	r4, __libc_csu_fini
 	bl	__libc_start_main
 #endif
 

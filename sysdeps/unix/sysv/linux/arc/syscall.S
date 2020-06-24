@@ -19,15 +19,15 @@
 #include <sysdep.h>
 
 ENTRY (syscall)
-	mov_s	r8, r0
-	mov_s	r0, r1
-	mov_s	r1, r2
-	mov_s	r2, r3
-	mov_s	r3, r4
-	mov_s	r4, r5
-	mov_s	r5, r6
+	MOVR	r8, r0
+	MOVR	r0, r1
+	MOVR	r1, r2
+	MOVR	r2, r3
+	MOVR	r3, r4
+	MOVR	r4, r5
+	MOVR	r5, r6
 
 	ARC_TRAP_INSN
-	brhi	r0, -4096, L (call_syscall_err)
+	BRRhi	r0, -4096, L (call_syscall_err)
 	j	[blink]
 PSEUDO_END (syscall)
