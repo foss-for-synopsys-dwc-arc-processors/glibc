@@ -23,16 +23,13 @@
 
 typedef int32_t atomic32_t;
 typedef uint32_t uatomic32_t;
-typedef int_fast32_t atomic_fast32_t;
-typedef uint_fast32_t uatomic_fast32_t;
+typedef int64_t atomic64_t;
+typedef uint64_t uatomic64_t;
 
 typedef intptr_t atomicptr_t;
 typedef uintptr_t uatomicptr_t;
 typedef intmax_t atomic_max_t;
 typedef uintmax_t uatomic_max_t;
-
-#define __HAVE_64B_ATOMICS 0
-#define USE_ATOMIC_COMPILER_BUILTINS 1
 
 /* ARC does have legacy atomic EX reg, [mem] instruction but the micro-arch
    is not as optimal as LLOCK/SCOND specially for SMP.  */
@@ -42,8 +39,11 @@ typedef uintmax_t uatomic_max_t;
   (abort (), 0)
 #define __arch_compare_and_exchange_bool_16_acq(mem, newval, oldval)	\
   (abort (), 0)
-#define __arch_compare_and_exchange_bool_64_acq(mem, newval, oldval)	\
-  (abort (), 0)
+
+#if defined(__ARCHS__)
+
+#define __HAVE_64B_ATOMICS 0
+#define USE_ATOMIC_COMPILER_BUILTINS 1
 
 #define __arch_compare_and_exchange_val_8_int(mem, newval, oldval, model)	\
   (abort (), (__typeof (*mem)) 0)
@@ -52,7 +52,7 @@ typedef uintmax_t uatomic_max_t;
 #define __arch_compare_and_exchange_val_64_int(mem, newval, oldval, model)	\
   (abort (), (__typeof (*mem)) 0)
 
-#define __arch_compare_and_exchange_val_32_int(mem, newval, oldval, model)	\
+# define __arch_compare_and_exchange_val_32_int(mem, newval, oldval, model)	\
   ({										\
     typeof (*mem) __oldval = (oldval);                                  	\
     __atomic_compare_exchange_n (mem, (void *) &__oldval, newval, 0,    	\
@@ -63,6 +63,97 @@ typedef uintmax_t uatomic_max_t;
 #define atomic_compare_and_exchange_val_acq(mem, new, old)		\
   __atomic_val_bysize (__arch_compare_and_exchange_val, int,		\
 		       mem, new, old, __ATOMIC_ACQUIRE)
+
+#else
+
+# define __HAVE_64B_ATOMICS 1
+# define USE_ATOMIC_COMPILER_BUILTINS 0
+
+#define __arch_compare_and_exchange_val_8_acq(mem, newval, oldval)		\
+  (abort (), (__typeof (*mem)) 0)
+#define __arch_compare_and_exchange_val_16_acq(mem, newval, oldval)		\
+  (abort (), (__typeof (*mem)) 0)
+
+# if defined(__ARC64__)
+
+#  define __arch_compare_and_exchange_val_32_acq(mem, newval, oldval)		\
+  ({										\
+	__typeof(*(mem)) prev;							\
+										\
+	__asm__ __volatile__(							\
+	"1:	llock  %0, [%1]	\n"						\
+	"	brne   %0, %2, 2f	\n"					\
+	"	scond  %3, [%1]	\n"						\
+	"	bnz     1b		\n"					\
+	"2:				\n"					\
+	: "=&r"(prev)								\
+	: "r"(mem), "ir"(oldval),						\
+	  "r"(newval) /* can't be "ir". scond can't take limm for "b".  */	\
+	: "cc", "memory");							\
+										\
+	prev;									\
+  })
+
+#  define __arch_compare_and_exchange_val_64_acq(mem, newval, oldval)		\
+  ({										\
+	__typeof(*(mem)) prev;							\
+										\
+	__asm__ __volatile__(							\
+	"1:	llockl  %0, [%1]	\n"					\
+	"	brne    %0, %2, 2f	\n"					\
+	"	scondl  %3, [%1]	\n"					\
+	"	bnz     1b		\n"					\
+	"2:				\n"					\
+	: "=&r"(prev)								\
+	: "r"(mem), "ir"(oldval),						\
+	  "r"(newval)								\
+	: "cc", "memory");							\
+										\
+	prev;									\
+  })
+
+# elif defined(__ARC32__)
+
+#  define __arch_compare_and_exchange_val_32_acq(mem, newval, oldval)		\
+  ({										\
+	__typeof(*(mem)) prev;							\
+										\
+	__asm__ __volatile__(							\
+	"1:	llock   %0, [%1]	\n"					\
+	"	brne    %0, %2, 2f	\n"					\
+	"	scond   %3, [%1]	\n"					\
+	"	bnz     1b		\n"					\
+	"2:				\n"					\
+	: "=&r"(prev)								\
+	: "r"(mem), "ir"(oldval),						\
+	  "r"(newval)								\
+	: "cc", "memory");							\
+										\
+	prev;									\
+  })
+
+#  define __arch_compare_and_exchange_val_64_acq(mem, newval, oldval)		\
+  ({										\
+	__typeof(*(mem)) prev;							\
+										\
+	__asm__ __volatile__(							\
+	"1:	llockd  %0, [%1]	\n"					\
+	"	brne    %L0, %L2, 2f	\n"					\
+	"	brne    %H0, %H2, 2f	\n"					\
+	"	scondd  %3, [%1]	\n"					\
+	"	bnz     1b		\n"					\
+	"2:				\n"					\
+	: "=&r"(prev)								\
+	: "r"(mem), "ir"(oldval),						\
+	  "r"(newval)								\
+	: "cc", "memory");							\
+										\
+	prev;									\
+  })
+
+# endif
+
+#endif
 
 #define atomic_full_barrier()  ({ asm volatile ("dmb 3":::"memory"); })
 
