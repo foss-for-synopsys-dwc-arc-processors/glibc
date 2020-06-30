@@ -59,8 +59,7 @@ static const sigset_t sigall_set = {
 };
 
 static const sigset_t sigtimer_set = {
-  .__val = { [0]                      = __sigmask (SIGTIMER),
-             [1 ... _SIGSET_NWORDS-1] = 0 }
+  .__val = { [0]                      = __sigmask (SIGTIMER) }
 };
 
 /* Block all signals, including internal glibc ones.  */
