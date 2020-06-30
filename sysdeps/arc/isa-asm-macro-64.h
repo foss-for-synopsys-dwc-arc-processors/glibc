@@ -44,9 +44,14 @@
 	andl    \d, \s, \v
 .endm
 
-.irp    cc,,eq,hi
+.irp    cc,eq,hi
 .macro BRR\cc d, s, v
-	br\cc\()l  \d, \s, \v
+; arc64 gas doesn't support BRHIL pseudo-instruction
+.ifeqs "\cc","hi"
+	brlo\()l  \s, \d, \v
+.else
+	br\cc\()l \d, \s, \v
+.endif
 .endm
 .endr
 
