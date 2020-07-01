@@ -25,6 +25,7 @@
 #include <stdlib.h>
 #include <sys/mman.h>
 #include <unistd.h>
+#include <atomic.h>
 
 /* This structure keeps track of test failures.  The counter is
    incremented on each failure.  The failed member is set to true if a
@@ -66,8 +67,8 @@ support_record_failure (void)
     }
   /* Relaxed MO is sufficient because we are only interested in the
      values themselves, in isolation.  */
-  __atomic_store_n (&state->failed, 1, __ATOMIC_RELEASE);
-  __atomic_add_fetch (&state->counter, 1, __ATOMIC_RELEASE);
+  atomic_store_release (&state->failed, 1);
+  atomic_fetch_add_release (&state->counter, 1);
 }
 
 int
@@ -84,10 +85,10 @@ support_report_failure (int status)
      assumes that exiting from the main thread happens before the
      error reporting via support_record_failure, which requires some
      form of external synchronization.  */
-  bool failed = __atomic_load_n (&state->failed, __ATOMIC_RELAXED);
+  bool failed = atomic_load_relaxed (&state->failed);
   if (failed)
     printf ("error: %u test failures\n",
-            __atomic_load_n (&state->counter, __ATOMIC_RELAXED));
+            atomic_load_relaxed (&state->counter));
 
   if ((status == 0 || status == EXIT_UNSUPPORTED) && failed)
     /* If we have a recorded failure, it overrides a non-failure
@@ -101,8 +102,8 @@ support_record_failure_reset (void)
 {
   /* Only used for testing the test framework, with external
      synchronization, but use release MO for consistency.  */
-  __atomic_store_n (&state->failed, 0, __ATOMIC_RELAXED);
-  __atomic_add_fetch (&state->counter, 0, __ATOMIC_RELAXED);
+  atomic_store_relaxed (&state->failed, 0);
+  atomic_fetch_add_release (&state->counter, 0);
 }
 
 int
@@ -110,5 +111,5 @@ support_record_failure_is_failed (void)
 {
   /* Relaxed MO is sufficient because we need (blocking) external
      synchronization for reliable test error reporting anyway.  */
-  return __atomic_load_n (&state->failed, __ATOMIC_RELAXED);
+  return atomic_load_relaxed (&state->failed);
 }
