@@ -4041,9 +4041,7 @@ enum
 #define R_ARC_16		0x2
 #define R_ARC_24		0x3
 #define R_ARC_32		0x4
-#define R_ARC_B26		0x5
-#define R_ARC_B22_PCREL		0x6
-#define R_ARC_H30		0x7
+
 #define R_ARC_N8		0x8
 #define R_ARC_N16		0x9
 #define R_ARC_N24		0xA
@@ -4099,7 +4097,7 @@ enum
 #define R_ARC_TLS_GD_LD	        0x46
 #define R_ARC_TLS_GD_CALL	0x47
 #define R_ARC_TLS_IE_GOT	0x48
-#define R_ARC_TLS_DTPOFF_S9	0x4a
+#define R_ARC_TLS_DTPOFF_S9	0x49
 #define R_ARC_TLS_LE_S9		0x4a
 #define R_ARC_TLS_LE_32		0x4b
 
