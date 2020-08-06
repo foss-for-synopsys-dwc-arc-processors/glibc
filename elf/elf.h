@@ -359,7 +359,10 @@ typedef struct
 #define EM_BPF		247	/* Linux BPF -- in-kernel virtual machine */
 #define EM_CSKY		252     /* C-SKY */
 
-#define EM_NUM		253
+#define EM_ARCV3	253     /* Synopsys ARCv3 64-bit ISA */
+#define EM_ARCV3_32	255     /* Synopsys ARCv3 32-bit ISA */
+
+#define EM_NUM		256
 
 /* Old spellings/synonyms.  */
 
@@ -4034,15 +4037,13 @@ enum
 #define R_NDS32_TLS_TPOFF	102
 #define R_NDS32_TLS_DESC	119
 
-/* ARCompact/ARCv2 specific relocs.  */
+/* ARCompact/ARCv2/ARCv3 specific relocs.  */
 #define R_ARC_NONE		0x0
 #define R_ARC_8			0x1
 #define R_ARC_16		0x2
 #define R_ARC_24		0x3
 #define R_ARC_32		0x4
-#define R_ARC_B26		0x5
-#define R_ARC_B22_PCREL		0x6
-#define R_ARC_H30		0x7
+
 #define R_ARC_N8		0x8
 #define R_ARC_N16		0x9
 #define R_ARC_N24		0xA
@@ -4098,7 +4099,7 @@ enum
 #define R_ARC_TLS_GD_LD	        0x46
 #define R_ARC_TLS_GD_CALL	0x47
 #define R_ARC_TLS_IE_GOT	0x48
-#define R_ARC_TLS_DTPOFF_S9	0x4a
+#define R_ARC_TLS_DTPOFF_S9	0x49
 #define R_ARC_TLS_LE_S9		0x4a
 #define R_ARC_TLS_LE_32		0x4b
 
