@@ -133,10 +133,10 @@ elf_machine_runtime_setup (struct link_map *l, int lazy, int profile)
     {
       /* update .got.plt[1] and .got.plt[2].
          DT_PLTGOT point to base of .plt and PLT0 is 3 instructions
-         for total of 10 bytes, see illustration at top.
+         for total of 20 bytes, see illustration at top.
          The word right after contains base address of .got.plt.  */
       ElfW(Addr) *plt_base = (ElfW(Addr) *) D_PTR (l, l_info[DT_PLTGOT]);
-      ElfW(Addr) *got_build = (ElfW(Addr) *) ((uintptr_t)plt_base + 10);
+      ElfW(Addr) *got_build = (ElfW(Addr) *) ((uintptr_t)plt_base + 20);
       ElfW(Addr) *got = (ElfW(Addr) *) (*got_build + l->l_addr);
 
       got[1] = (ElfW(Addr)) l;	/* Identify this shared object.  */
