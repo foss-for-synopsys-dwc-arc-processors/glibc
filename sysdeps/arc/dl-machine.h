@@ -307,6 +307,7 @@ elf_machine_rela (struct link_map *map, const ElfW(Rela) *reloc,
           break;
 
         case R_ARC_32:
+        case R_ARC_64:
           *reloc_addr += value + reloc->r_addend;
           break;
 

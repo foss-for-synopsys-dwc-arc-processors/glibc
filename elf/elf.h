@@ -4044,6 +4044,7 @@ enum
 #define R_ARC_16		0x2
 #define R_ARC_24		0x3
 #define R_ARC_32		0x4
+#define R_ARC_64		0x5
 
 #define R_ARC_N8		0x8
 #define R_ARC_N16		0x9
