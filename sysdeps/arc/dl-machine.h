@@ -163,7 +163,7 @@ __start:								\n\
 	/* (1). bootstrap ld.so.  */					\n\
 	bl.d    _dl_start                                       	\n\
 	MOVR    r0, sp  /* pass ptr to aux vector tbl.    */    	\n\
-	MOVR    r13, r0	/* safekeep app elf entry point.  */		\n\
+	MOVR    r14, r0	/* safekeep app elf entry point.  */		\n\
 									\n\
 	/* (2). If ldso ran with executable as arg.       */		\n\
 	/*      skip the extra args calc by dl_start.     */		\n\
@@ -174,21 +174,21 @@ __start:								\n\
 	ADD2R   sp, sp, r12 /* discard argv entries from stack.  */	\n\
 	SUBR    r1, r1, r12 /* adjusted argc on stack.  */      	\n\
 	STR     r1, sp                                        	\n\
-	ADDR	r2, sp, 4						\n\
+	ADDR	r2, sp, 8						\n\
 	/* intermediate LD for ST encoding limitations.  */		\n\
 	LDR	r3, pcl, _dl_argv@gotpc    				\n\
 	STR	r2, r3						\n\
 1:									\n\
 	/* (3). call preinit stuff.  */					\n\
 	LDR	r0, pcl, _rtld_local@pcl				\n\
-	ADDR	r2, sp, 4	; argv					\n\
-	ADD2R	r3, r2, r1						\n\
-	ADDR	r3, r3, 4	; env					\n\
+	ADDR	r2, sp, 8	; argv					\n\
+	ADD3R	r3, r2, r1						\n\
+	ADDR	r3, r3, 8	; env					\n\
 	bl	_dl_init@plt						\n\
 									\n\
 	/* (4) call app elf entry point.  */				\n\
 	ADDR    r0, pcl, _dl_fini@pcl					\n\
-	j	[r13]							\n\
+	j	[r14]							\n\
 									\n\
 	.size  __start,.-__start                               		\n\
 	.previous                                               	\n\
