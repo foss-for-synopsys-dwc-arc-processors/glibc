@@ -158,7 +158,7 @@ __start:								\n\
 	/* (1). bootstrap ld.so.  */					\n\
 	bl.d    _dl_start                                       	\n\
 	MOVR    r0, sp  /* pass ptr to aux vector tbl.    */    	\n\
-	MOVR    r13, r0	/* safekeep app elf entry point.  */		\n\
+	MOVR    r14, r0	/* safekeep app elf entry point.  */		\n\
 									\n\
 	/* (2). If ldso ran with executable as arg.       */		\n\
 	/*      skip the extra args calc by dl_start.     */		\n\
@@ -183,7 +183,7 @@ __start:								\n\
 									\n\
 	/* (4) call app elf entry point.  */				\n\
 	ADDR    r0, pcl, _dl_fini@pcl					\n\
-	j	[r13]							\n\
+	j	[r14]							\n\
 									\n\
 	.size  __start,.-__start                               		\n\
 	.previous                                               	\n\
