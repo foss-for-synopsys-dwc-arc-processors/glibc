@@ -299,6 +299,7 @@ tests = tst-attr2 tst-attr3 tst-default-attr \
 	tst-thread-affinity-sched \
 	tst-pthread-defaultattr-free \
 	tst-pthread-attr-sigmask \
+	tst-eintr1 \
 
 
 tests-container =  tst-pthread-getattr
@@ -311,10 +312,6 @@ tests-internal := tst-robustpi8 tst-rwlock19 tst-rwlock20 \
 
 xtests = tst-setuid1 tst-setuid1-static tst-setuid2 \
 	tst-mutexpp1 tst-mutexpp6 tst-mutexpp10 tst-setgroups
-
-# This test can run into task limits because of a linux kernel bug
-# and then cause the make process to fail too, see bug 24537.
-xtests += tst-eintr1
 
 test-srcs = tst-oddstacklimit
 
