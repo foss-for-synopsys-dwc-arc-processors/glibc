@@ -173,7 +173,7 @@ __start:								\n\
 	LDR     r12, pcl, _dl_skip_args@pcl                   		\n\
 	BRReq	r12, 0, 1f						\n\
 									\n\
-	ADD2R   sp, sp, r12 /* discard argv entries from stack.  */	\n\
+	ADD3R   sp, sp, r12 /* discard argv entries from stack.  */	\n\
 	SUBR    r1, r1, r12 /* adjusted argc on stack.  */      	\n\
 	STR     r1, sp                                        	\n\
 	ADDR	r2, sp, 8						\n\
