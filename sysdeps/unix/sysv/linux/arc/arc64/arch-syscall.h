@@ -193,6 +193,7 @@
 #define __NR_recvmsg 212
 #define __NR_remap_file_pages 234
 #define __NR_removexattr 14
+#define __NR_renameat 38
 #define __NR_renameat2 276
 #define __NR_request_key 218
 #define __NR_restart_syscall 128
