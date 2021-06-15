@@ -1,4 +1,9 @@
+#if defined (__ARC_FLOAT_ABI_HARD__)
+#define ARC_NUMREG		64
+#else
 #define ARC_NUMREG		32
+#endif
+
 #define ARC_NUMSIGW		2
 
 /* see struct __jmp_buf_tag in generic code.  */
