@@ -64,3 +64,23 @@
 	cmpl\cc \d, \s
 .endm
 .endr
+
+.irp    aa,,.as,.aw,.ab
+.macro FLDR\aa d, s, off=0
+	fld64\aa \d, [\s, \off]
+.endm
+.endr
+
+.irp    aa,,.as,.aw,.ab
+.macro FSTR\aa d, s, off=0
+	fst64\aa \d, [\s, \off]
+.endm
+.endr
+
+.macro FPUSHR r
+	FSTR.aw  \r, sp, -REGSZ
+.endm
+
+.macro FPOPR r
+	FLDR.ab  \r, sp, REGSZ
+.endm
