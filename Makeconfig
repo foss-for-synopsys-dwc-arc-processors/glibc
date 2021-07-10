@@ -979,7 +979,6 @@ CPPFLAGS += -DTOP_NAMESPACE=glibc
 endif
 
 override CFLAGS	= -std=gnu11 -fgnu89-inline $(config-extra-cflags) \
-		  -Wno-error \
 		  $(filter-out %frame-pointer,$(+cflags)) $(+gccwarn-c) \
 		  $(+extra-math-flags) \
 		  $(sysdep-CFLAGS) $(CFLAGS-$(suffix $@)) $(CFLAGS-$(<F)) \
