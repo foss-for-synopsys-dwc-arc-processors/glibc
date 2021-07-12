@@ -75,23 +75,21 @@ ENTRY (__setcontext)
 	FLDR.as	f6,   r9, 49
 	FLDR.as	f7,   r9, 50
 
-	FLDR.as	f14,  r9, 51
-	FLDR.as	f15,  r9, 52
-	FLDR.as	f16,  r9, 53
-	FLDR.as	f17,  r9, 54
-	FLDR.as	f18,  r9, 55
-	FLDR.as	f19,  r9, 56
-	FLDR.as	f20,  r9, 57
-	FLDR.as	f21,  r9, 58
-	FLDR.as	f22,  r9, 59
-	FLDR.as	f23,  r9, 60
-	FLDR.as	f24,  r9, 61
-	FLDR.as	f25,  r9, 62
-	FLDR.as	f26,  r9, 63
-	FLDR.as	f27,  r9, 64
-	FLDR.as	f28,  r9, 65
-	FLDR.as	f29,  r9, 66
-	FLDR.as	f30,  r9, 67
+	FLDR.as	f16,  r9, 51
+	FLDR.as	f17,  r9, 52
+	FLDR.as	f18,  r9, 53
+	FLDR.as	f19,  r9, 54
+	FLDR.as	f20,  r9, 55
+	FLDR.as	f21,  r9, 56
+	FLDR.as	f22,  r9, 57
+	FLDR.as	f23,  r9, 58
+	FLDR.as	f24,  r9, 59
+	FLDR.as	f25,  r9, 60
+	FLDR.as	f26,  r9, 61
+	FLDR.as	f27,  r9, 62
+	FLDR.as	f28,  r9, 63
+	FLDR.as	f29,  r9, 64
+	FLDR.as	f30,  r9, 66
 	FLDR.as	f31,  r9, 68
 #endif
 
