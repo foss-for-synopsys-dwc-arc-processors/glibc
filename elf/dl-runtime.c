@@ -56,7 +56,7 @@ _dl_fixup (
 # ifdef ELF_MACHINE_RUNTIME_FIXUP_ARGS
 	   ELF_MACHINE_RUNTIME_FIXUP_ARGS,
 # endif
-	   struct link_map *l, ElfW(Word) reloc_arg)
+	   struct link_map *l, uintptr_t reloc_arg)
 {
   const ElfW(Sym) *const symtab
     = (const void *) D_PTR (l, l_info[DT_SYMTAB]);
@@ -152,7 +152,7 @@ _dl_profile_fixup (
 #ifdef ELF_MACHINE_RUNTIME_FIXUP_ARGS
 		   ELF_MACHINE_RUNTIME_FIXUP_ARGS,
 #endif
-		   struct link_map *l, ElfW(Word) reloc_arg,
+		   struct link_map *l, uintptr_t reloc_arg,
 		   ElfW(Addr) retaddr, void *regs, long int *framesizep)
 {
   void (*mcount_fct) (ElfW(Addr), ElfW(Addr)) = _dl_mcount;
@@ -484,7 +484,7 @@ _dl_profile_fixup (
 #include <stdio.h>
 void
 ARCH_FIXUP_ATTRIBUTE
-_dl_call_pltexit (struct link_map *l, ElfW(Word) reloc_arg,
+_dl_call_pltexit (struct link_map *l, uintptr_t reloc_arg,
 		  const void *inregs, void *outregs)
 {
 #ifdef SHARED
