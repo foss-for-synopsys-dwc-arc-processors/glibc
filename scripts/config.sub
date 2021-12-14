@@ -2,7 +2,7 @@
 # Configuration validation subroutine script.
 #   Copyright 1992-2019 Free Software Foundation, Inc.
 
-timestamp='2019-01-01'
+timestamp='2021-12-14'
 
 # This file is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
@@ -1144,6 +1144,10 @@ case $cpu-$vendor in
 	s390x-*)
 		cpu=s390x
 		vendor=ibm
+		;;
+	arc32*-*)
+		cpu=arc32
+		vendor=linux
 		;;
 	arc64*-*)
 		cpu=arc64
