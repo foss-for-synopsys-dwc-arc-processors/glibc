@@ -52,6 +52,10 @@
   __atomic_val_bysize (__arch_compare_and_exchange_val, int,		\
 		       mem, new, old, __ATOMIC_ACQUIRE)
 
+#ifdef __ARC700__
+#define atomic_full_barrier()  ({ asm volatile ("sync":::"memory"); })
+#else
 #define atomic_full_barrier()  ({ asm volatile ("dmb 3":::"memory"); })
+#endif
 
 #endif /* _ARC_BITS_ATOMIC_H */

@@ -24,8 +24,13 @@ ENTRY (syscall)
 	mov_s	r1, r2
 	mov_s	r2, r3
 	mov_s	r3, r4
+#ifdef __ARC700__
+	mov	r4, r5
+	mov	r5, r6
+#else
 	mov_s	r4, r5
 	mov_s	r5, r6
+#endif
 
 	ARC_TRAP_INSN
 	brhi	r0, -4096, L (call_syscall_err)

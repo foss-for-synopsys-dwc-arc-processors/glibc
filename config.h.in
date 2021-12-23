@@ -123,6 +123,9 @@
 /* ARC big endian ABI */
 #undef HAVE_ARC_BE
 
+/* ARC 700 */
+#undef HAVE_ARC700
+
 /* C-SKY ABI version.  */
 #undef CSKYABI
 

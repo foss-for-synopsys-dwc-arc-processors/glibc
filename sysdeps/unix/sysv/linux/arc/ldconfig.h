@@ -18,9 +18,11 @@
 
 #include <sysdeps/generic/ldconfig.h>
 
-#define SYSDEP_KNOWN_INTERPRETER_NAMES 		\
-  { "/lib/ld-linux-arc.so.2", FLAG_ELF_LIBC6 },	\
-  { "/lib/ld-linux-arceb.so.2", FLAG_ELF_LIBC6 },
+#define SYSDEP_KNOWN_INTERPRETER_NAMES 			\
+  { "/lib/ld-linux-arc.so.2", FLAG_ELF_LIBC6 },		\
+  { "/lib/ld-linux-arceb.so.2", FLAG_ELF_LIBC6 },	\
+  { "/lib/ld-linux-arc700.so.2", FLAG_ELF_LIBC6 },	\
+  { "/lib/ld-linux-arc700eb.so.2", FLAG_ELF_LIBC6 },
 
 #define SYSDEP_KNOWN_LIBRARY_NAMES 	\
   { "libc.so.6", FLAG_ELF_LIBC6 },	\
