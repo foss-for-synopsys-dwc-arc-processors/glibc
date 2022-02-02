@@ -24,7 +24,7 @@
 
 /* "workarounds" for generic code needing to handle 64-bit time_t.  */
 
-#ifndef __ARC64_ARCH64___
+#ifndef __ARC64_ARCH64__
 
 /* Fix sysdeps/unix/sysv/linux/clock_getcpuclockid.c.  */
 #define __NR_clock_getres	__NR_clock_getres_time64
