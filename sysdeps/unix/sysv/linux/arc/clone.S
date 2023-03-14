@@ -41,6 +41,7 @@
 
 ENTRY (__clone)
 	CMPR	r0, 0		/* @fn can't be NULL.  */
+	ANDR	r1,r1,-REGSZ	/* @child_stack 4/8 aligned per ABI.  */
 	CMPR.ne	r1, 0		/* @child_stack can't be NULL.  */
 	bz	L (__sys_err)
 
